@@ -19,12 +19,14 @@ public class MainForma extends javax.swing.JFrame {
     /**
      * Creates new form MainForma
      */
-    Controller kontroler = Controller.getInstance();
+    Controller kontroler;
     public MainForma() {
         initComponents();
         Controller kontroler = Controller.getInstance();
-        TableModel tableModel = new TableModel(kontroler.getListaZurka());
+        setTitle("Organizacija zurki");
+        TableModel tableModel = new TableModel(kontroler.ucitajZurkeIzBaze());
         jTableZurke.setModel(tableModel);
+        System.out.println(kontroler.ucitajZurkeIzBaze());
     }
 
     /**
@@ -186,7 +188,8 @@ public class MainForma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void osveziTabelu() {
-        TableModel tableModel = (TableModel) jTableZurke.getModel();
-        tableModel.osveziPodatke();
+        TableModel tableModel = new TableModel(kontroler.ucitajZurkeIzBaze());
+        //tableModel.osveziPodatke();
+        jTableZurke.setModel(tableModel);
     }
 }

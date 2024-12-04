@@ -11,11 +11,27 @@ import java.util.Objects;
  * @author user
  */
 public class Organizator {
+    private int id;
     private String ime;         // Ime organizatora
 private String brojTelefona;     // Kontakt informacije organizatora
 private int iskustvo;       // Iskustvo u godinama
 
     public Organizator() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Organizator(int id, String ime, String brojTelefona, int iskustvo) {
+        this.id = id;
+        this.ime = ime;
+        this.brojTelefona = brojTelefona;
+        this.iskustvo = iskustvo;
     }
 
     public Organizator(String ime, String brojTelefona, int iskustvo) {

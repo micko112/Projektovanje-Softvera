@@ -18,11 +18,12 @@ private List<Zurka> listaZurka;
 
     public TableModel(List<Zurka> listaZurka) {
         this.listaZurka = listaZurka;
+        System.out.println("podaci u modelu "+listaZurka);
     }
    
 
     private Controller kontroler = Controller.getInstance();
-    private String kolone[] = {"naziv", "organizator", "tip", "datum", "lokacija","broj Gostiju", "Budzet" };
+    private String kolone[] = {"id","naziv", "organizator", "tip", "datum", "lokacija","broj Gostiju", "Budzet" };
     @Override
     public int getRowCount() {
       return kontroler.getListaZurka().size();
@@ -38,18 +39,20 @@ private List<Zurka> listaZurka;
         Zurka zurka =  listaZurka.get(rowIndex);
         switch (columnIndex) {
             case 0:
+                return zurka.getId( );
+            case 1:
                 return zurka.getNaziv();
-           case 1:
+           case 2:
                 return zurka.getOrganizator();
-                case 2:
-                return zurka.getTip();
                 case 3:
-                return zurka.getDatum();
+                return zurka.getTip();
                 case 4:
-                return zurka.getLokacija();
+                return zurka.getDatum();
                 case 5:
+                return zurka.getLokacija();
+                case 6:
                 return zurka.getBrojGostiju();
-                 case 6:
+                 case 7:
                 return zurka.getBudzet();
             default:
                return "Nigga nema tvog polja";

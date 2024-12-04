@@ -12,6 +12,7 @@ import java.time.LocalDate;
  */
 
   public class Zurka {
+      private int id;
     private String naziv;
     private Organizator organizator;
     private TipZurke tip;
@@ -19,6 +20,26 @@ import java.time.LocalDate;
     private String lokacija;
     private int brojGostiju;
     private double budzet;
+
+    public Zurka(int id, String naziv, Organizator organizator, TipZurke tip, LocalDate datum, String lokacija, int brojGostiju, double budzet) {
+        this.id = id;
+        this.naziv = naziv;
+        this.organizator = organizator;
+        this.tip = tip;
+        this.datum = datum;
+        this.lokacija = lokacija;
+        this.brojGostiju = brojGostiju;
+        this.budzet = budzet;
+    }
+
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // Konstruktori
     public Zurka(String naziv, Organizator organizator, TipZurke tip, LocalDate datum, String lokacija, int brojGostiju, double budzet) {

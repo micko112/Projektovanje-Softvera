@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Baza.DBBroker;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +30,23 @@ public class Controller {
     private List<Zurka> listaZurka = new ArrayList<>();
     private List<Organizator> listaOrganizatora = new ArrayList<>();
 
+    DBBroker dbb;
     public Controller() {
-        Organizator micko = new Organizator("micko", "0648617909", 5);
+        dbb = new DBBroker();
         
-        Organizator nidza = new Organizator("Nidza", "0649132549", 2);
-      
-         Zurka NovaGodina = new Zurka("proslava nove godine", micko, TipZurke.KUCNA_ZURKA, LocalDate.of(2024, 12, 31), "save Jovanovica 71", 50, 50000);
-         Zurka Rodjendan = new Zurka("Rodjendan", nidza, TipZurke.RODJENDAN, LocalDate.of(2025, 7, 1), "save Jovanovica 71", 20, 30000);
-         Zurka KoktelZurka = new Zurka("Koktel Party", micko, TipZurke.TEMATSKA_ZURKA, LocalDate.of(2025, 7, 18), "save Jovanovica 71", 70, 100000);
-         
-        listaZurka.add(NovaGodina);
-        listaZurka.add(Rodjendan);
-        listaZurka.add(KoktelZurka);
-        listaOrganizatora.add(nidza);
-        listaOrganizatora.add(micko );
-        
+//        Organizator micko = new Organizator("micko", "0648617909", 5);
+//        
+//        Organizator nidza = new Organizator("Nidza", "0649132549", 2);
+//      
+//         Zurka NovaGodina = new Zurka("proslava nove godine", micko, TipZurke.KUCNA_ZURKA, LocalDate.of(2024, 12, 31), "save Jovanovica 71", 50, 50000);
+//         Zurka Rodjendan = new Zurka("Rodjendan", nidza, TipZurke.RODJENDAN, LocalDate.of(2025, 7, 1), "save Jovanovica 71", 20, 30000);
+//         Zurka KoktelZurka = new Zurka("Koktel Party", micko, TipZurke.TEMATSKA_ZURKA, LocalDate.of(2025, 7, 18), "save Jovanovica 71", 70, 100000);
+//         
+//        listaZurka.add(NovaGodina);
+//        listaZurka.add(Rodjendan);
+//        listaZurka.add(KoktelZurka);
+//        listaOrganizatora.add(nidza);
+//        listaOrganizatora.add(micko );          
     }
 
     public List<Zurka> getListaZurka() {
@@ -93,6 +96,10 @@ public class Controller {
         return "Controller{" + "listaZurka=" + listaZurka + ", listaOrganizatora=" + listaOrganizatora + '}';
     }
 
+    public List<Zurka> ucitajZurkeIzBaze(){
+        dbb = new DBBroker();
+        return dbb.ucitajListuZurka();
+    }
     public void dodajZurku(Zurka zurka) {
         listaZurka.add(zurka);
         
