@@ -17,6 +17,7 @@ import model.TipZurke;
 import java.sql.ResultSet;
 import java.util.Date;
 import model.Organizator;
+import java.sql.PreparedStatement;
 /**
  *
  * @author user
@@ -46,18 +47,64 @@ public class DBBroker {
                 LocalDate datum = rs.getDate("z.datum").toLocalDate();
                 String lokacija = rs.getString("z.lokacija");
                 int brGostiju = rs.getInt("z.brojGostiju");
-                int budzet = rs.getInt("z.budzet");
+                double budzet = rs.getDouble("z.budzet");
                  Organizator organizator = new  Organizator(orgID, ime, brojTelefona, iskustvo);
               Zurka zurka = new Zurka(id, naziv, organizator, tip, datum, lokacija, brGostiju, budzet);
               listaZurki.add(zurka);
             }
-
-          
         } catch (SQLException ex) {
             Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
         }
        return listaZurki;
      
+    }
+
+    public List<Organizator> ucitajOrganizatoreIzBaze() {
+          List<Organizator> listaOrg =  new ArrayList<>();
+        try {
+        
+            String upit = "SELECT * FROM organizatori o";
+            Statement st = Konekcija.getInstance().getConnection().createStatement();
+            ResultSet rs = st.executeQuery(upit);
+            while(rs.next()){
+                int id = rs.getInt("o.id");
+                String ime = rs.getString("o.ime");
+                String brojTel = rs.getString("o.brojTelefona");
+                int iskustvo = rs.getInt("o.iskustvo");
+                
+                Organizator org = new Organizator(id, ime, brojTel, iskustvo);
+                listaOrg.add(org);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaOrg;
+        
+    }
+
+    public void dodajZurku(Zurka zurka) {
+     
+        try {
+            String upit = "INSERT INTO zurke(id,naziv,organizatorID,tip,datum,lokacija,brojGostiju,budzet) Values(?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = Konekcija.getInstance().getConnection().prepareStatement(upit);
+           
+            
+            ps.setInt(1, zurka.getId());
+            ps.setString(2, zurka.getNaziv());
+            ps.setInt(3, zurka.getOrganizator().getId());
+            ps.setString(4, String.valueOf(zurka.getTip()));
+            ps.setDate(5, java.sql.Date.valueOf(zurka.getDatum()));
+            ps.setString(6, zurka.getLokacija());
+            ps.setInt(7, zurka.getBrojGostiju());
+             ps.setDouble(8, zurka.getBudzet());
+            
+             ps.executeUpdate();
+             Konekcija.getInstance().getConnection().commit();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     

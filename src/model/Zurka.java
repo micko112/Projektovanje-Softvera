@@ -129,15 +129,14 @@ import java.time.LocalDate;
     // toString metoda
     @Override
     public String toString() {
-        return "Zurka{" +
-                "naziv='" + naziv + '\'' +
-                ", organizator=" + organizator +
-                ", tip=" + tip +
-                ", datum='" + datum + '\'' +
-                ", lokacija='" + lokacija + '\'' +
-                ", brojGostiju=" + brojGostiju +
-                ", budzet=" + budzet +
-                '}';
+        return "Zurka" +
+               naziv
+                +organizator +
+               tip
+                +datum 
+                 +lokacija 
+                +brojGostiju
+                +budzet +"\n";
     }
 }
   

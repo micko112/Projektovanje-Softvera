@@ -22,7 +22,7 @@ public class MainForma extends javax.swing.JFrame {
     Controller kontroler;
     public MainForma() {
         initComponents();
-        Controller kontroler = Controller.getInstance();
+         kontroler = Controller.getInstance();
         setTitle("Organizacija zurki");
         TableModel tableModel = new TableModel(kontroler.ucitajZurkeIzBaze());
         jTableZurke.setModel(tableModel);
@@ -188,6 +188,7 @@ public class MainForma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void osveziTabelu() {
+        
         TableModel tableModel = new TableModel(kontroler.ucitajZurkeIzBaze());
         //tableModel.osveziPodatke();
         jTableZurke.setModel(tableModel);

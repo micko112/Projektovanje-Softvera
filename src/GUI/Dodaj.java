@@ -7,6 +7,7 @@ package GUI;
 import Controller.Controller;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import model.Organizator;
@@ -23,7 +24,7 @@ public class Dodaj extends javax.swing.JDialog {
      * Creates new form Dodaj
      */
      private MainForma gf = new MainForma();
-    Controller kontroler;
+    private Controller kontroler;
     Zurka zurkaZaIzmenu;
     public Dodaj(java.awt.Frame parent, boolean modal, Zurka zurkaZaIzmenu) {
         super(parent, modal);
@@ -248,10 +249,11 @@ String naziv = jTextFieldNaziv.getText();
     String lokacija = jTextFieldLokacija.getText();
     int brojGostiju = Integer.parseInt(jTextFieldBrojGostiju.getText()); // Pretpostavljamo da je unos broj
     double budzet = Double.parseDouble(jTextFieldBudzet.getText()); // Pretpostavljamo da je unos broj
-    
+        Random random = new Random();
+        int id = random.nextInt()+101;
     // Kreiranje nove žurke
-    Zurka zurka = new Zurka(naziv, org, tip, datum, lokacija, brojGostiju, budzet);
-       
+    Zurka zurka = new Zurka(id, naziv, org, tip, datum, lokacija, brojGostiju, budzet);
+        
        kontroler.dodajZurku(zurka);
        gf.osveziTabelu();
        this.dispose();        // TODO add your handling code here:
@@ -321,7 +323,7 @@ String naziv = jTextFieldNaziv.getText();
 
     private void popuniComboBoxOrganizatorima() {
         jComboBoxOrganizator.removeAllItems();
-        List<Organizator> organizatori = kontroler.getListaOrganizatora();
+        List<Organizator> organizatori = kontroler.ucitajOrganizatoreIzBaze();
         for (Organizator organizator : organizatori) {
                 jComboBoxOrganizator.addItem(organizator);
         }

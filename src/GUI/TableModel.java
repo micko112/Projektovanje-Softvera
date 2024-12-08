@@ -14,11 +14,11 @@ import model.Zurka;
  * @author user
  */
 public class TableModel extends AbstractTableModel {
-private List<Zurka> listaZurka;
+public List<Zurka> listaZurka;
 
     public TableModel(List<Zurka> listaZurka) {
         this.listaZurka = listaZurka;
-        System.out.println("podaci u modelu "+listaZurka);
+      
     }
    
 
@@ -26,7 +26,7 @@ private List<Zurka> listaZurka;
     private String kolone[] = {"id","naziv", "organizator", "tip", "datum", "lokacija","broj Gostiju", "Budzet" };
     @Override
     public int getRowCount() {
-      return kontroler.getListaZurka().size();
+      return listaZurka.size();
     }
 
     @Override

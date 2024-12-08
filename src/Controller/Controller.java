@@ -15,22 +15,22 @@ import model.TipZurke;
 
 
 public class Controller {
-    
+    DBBroker dbb;
     private static Controller instance;
     
-    public static Controller getInstance(){
-        
-        if(instance==null){
+    public static Controller getInstance() {
+
+        if (instance == null) {
             instance = new Controller();
         }
-            return instance;
+        return instance;
     }
-    
+
     
     private List<Zurka> listaZurka = new ArrayList<>();
     private List<Organizator> listaOrganizatora = new ArrayList<>();
 
-    DBBroker dbb;
+   
     public Controller() {
         dbb = new DBBroker();
         
@@ -101,12 +101,21 @@ public class Controller {
         return dbb.ucitajListuZurka();
     }
     public void dodajZurku(Zurka zurka) {
-        listaZurka.add(zurka);
+        dbb.dodajZurku(zurka);
+        
         
     }
 
     public void izmeniZurku(Zurka selektovanaZurka) {
      
+    }
+
+    
+
+    public List<Organizator> ucitajOrganizatoreIzBaze() {
+      dbb = new DBBroker();
+     return  dbb.ucitajOrganizatoreIzBaze();
+           
     }
     
     
