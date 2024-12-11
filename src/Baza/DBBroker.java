@@ -106,7 +106,28 @@ public class DBBroker {
         }
         
     }
-    
-    
+
+    public void izmeniZurku(Zurka selektovanaZurka) {
+        try {
+            String upit = "Update zurke set naziv = ?, organizatorId = ?, tip =?, datum = ?, lokacija = ?, brojGostiju = ?, budzet = ? "
+                    + "where id = ?";
+            PreparedStatement ps = Konekcija.getInstance().getConnection().prepareStatement(upit);
+               ps.setInt(8, selektovanaZurka.getId());
+            ps.setString(1, selektovanaZurka.getNaziv());
+            ps.setInt(2, selektovanaZurka.getOrganizator().getId());
+            ps.setString(3, String.valueOf(selektovanaZurka.getTip()));
+            ps.setDate(4, java.sql.Date.valueOf(selektovanaZurka.getDatum()));
+            ps.setString(5, selektovanaZurka.getLokacija());
+            ps.setInt(6, selektovanaZurka.getBrojGostiju());
+             ps.setDouble(7, selektovanaZurka.getBudzet());
+             ps.executeUpdate();
+             Konekcija.getInstance().getConnection().commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+    }
+
+   
     
 }

@@ -6,6 +6,7 @@ package GUI;
 
 import Controller.Controller;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
@@ -35,6 +36,9 @@ public class Dodaj extends javax.swing.JDialog {
         
         if(zurkaZaIzmenu!=null){
             this.zurkaZaIzmenu=zurkaZaIzmenu;
+          
+          
+            jDateChooser1.setDate(java.sql.Date.valueOf(zurkaZaIzmenu.getDatum()));
             jTextFieldNaziv.setText(zurkaZaIzmenu.getNaziv());
             jTextFieldLokacija.setText(zurkaZaIzmenu.getLokacija());
             jTextFieldBrojGostiju.setText(String.valueOf(zurkaZaIzmenu.getBrojGostiju()));
@@ -216,12 +220,10 @@ public class Dodaj extends javax.swing.JDialog {
        TipZurke tip = (TipZurke) jComboBoxTip.getSelectedItem();
    java.util.Date date = jDateChooser1.getDate();  // jDateChooser umesto jCalendar
     LocalDate datum = date.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-    
-    // Preuzimanje drugih vrednosti (lokacija, broj gostiju, budžet)
     String lokacija = jTextFieldLokacija.getText();
     int brojGostiju = Integer.parseInt(jTextFieldBrojGostiju.getText()); // Pretpostavljamo da je unos broj
     double budzet = Double.parseDouble(jTextFieldBudzet.getText()); // Pretpostavljamo da je unos broj
-    
+  
     // Kreiranje nove žurke
     
     zurkaZaIzmenu.setNaziv(naziv);
@@ -230,6 +232,8 @@ public class Dodaj extends javax.swing.JDialog {
        zurkaZaIzmenu.setBudzet(budzet);
         zurkaZaIzmenu.setDatum(datum);
          zurkaZaIzmenu.setTip(tip);
+         
+         kontroler.izmeniZurku(zurkaZaIzmenu);
         gf.osveziTabelu();
         this.dispose();
     }//GEN-LAST:event_jButtonIzmeniActionPerformed

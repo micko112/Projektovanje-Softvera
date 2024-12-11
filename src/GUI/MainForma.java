@@ -26,7 +26,7 @@ public class MainForma extends javax.swing.JFrame {
         setTitle("Organizacija zurki");
         TableModel tableModel = new TableModel(kontroler.ucitajZurkeIzBaze());
         jTableZurke.setModel(tableModel);
-        System.out.println(kontroler.ucitajZurkeIzBaze());
+        
     }
 
     /**
@@ -120,7 +120,7 @@ public class MainForma extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(this, "Nigga nisi nista selektovao", "Greska", JOptionPane.ERROR_MESSAGE);
           
       }
-          kontroler.getListaZurka().remove(selectedRow);
+          kontroler.ucitajZurkeIzBaze().remove(selectedRow);
           osveziTabelu();
       
     }//GEN-LAST:event_jButtonObrisiActionPerformed
@@ -137,7 +137,7 @@ public class MainForma extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "nije selektova", "greska", JOptionPane.WARNING_MESSAGE);
            
        }
-       Zurka selektovanaZurka = kontroler.getListaZurka().get(selektovanRed);
+        Zurka selektovanaZurka = kontroler.ucitajZurkeIzBaze().get(selektovanRed);
         System.out.println(selektovanaZurka);
         new Dodaj(this, true,selektovanaZurka).setVisible(true);
         

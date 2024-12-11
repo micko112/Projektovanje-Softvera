@@ -107,7 +107,7 @@ public class Controller {
     }
 
     public void izmeniZurku(Zurka selektovanaZurka) {
-     
+     dbb.izmeniZurku(selektovanaZurka);
     }
 
     
@@ -117,6 +117,8 @@ public class Controller {
      return  dbb.ucitajOrganizatoreIzBaze();
            
     }
+
+   
     
     
     
